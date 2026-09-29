@@ -1,13 +1,456 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f2eb"><meta name="description" content="Design, simulate and stress-test a Rare Friends token economy before spending a single RF."><title>Friend Foundry — build an economy that lasts</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head><body>
-<header><a class="brand" href="./"><span class="brand-icon">ff</span> FRIEND FOUNDRY<span class="edition">/ 001</span></a><nav><a href="#method">How it works</a><a href="https://github.com/plus8bit/friend-foundry" target="_blank" rel="noopener">Source ↗</a><span class="tag"><i></i> ZERO-TRANSACTION LAB</span></nav></header>
-<main><section class="hero"><div><div class="eyebrow">A BUILDER'S TOOL FOR RARE FRIENDS</div><h1>Good friends.<br><span>Lasting economies.</span></h1><p>Give your idea a world to live in. Design the RF flow, put it under pressure, and see what survives.</p></div><aside class="hero-note"><span class="note-number">30</span><div>virtual days.<br>Real design decisions.</div><small>All RF flows are simulated.<br>No wallet. No funds. No forecasts.</small></aside></section>
-<section class="workspace" aria-label="Economy designer"><aside class="design panel"><div class="section-heading"><span class="eyebrow">01 / DESIGN</span><span class="small-label">Your blueprint</span></div><label class="select-label" for="preset">Start with an idea</label><select id="preset"><option value="workshop">Crafting workshop</option><option value="arcade">Reward-heavy arcade</option><option value="club">Friends creative club</option></select><p class="preset-note" id="preset-note"></p><div id="controls"></div><div class="allocation"><div id="allocation-bar"></div><div class="legend"><span><i class="orange"></i>Burn</span><span><i class="purple"></i>Creator</span><span><i class="green"></i>Reserve</span></div></div><details><summary>Community assumptions</summary><div id="community-controls"></div><p class="fine">Each active Friend makes at most one purchase per day. Retention and arrivals are fixed assumptions, not measured behavior.</p></details></aside>
-<div class="stage panel"><div class="section-heading"><span class="eyebrow">02 / PUT IT IN MOTION</span><span class="live-dot" id="run-label">READY TO SIMULATE</span></div><div class="world-heading"><h2 id="world-title">The crafting district</h2><span class="day-badge">DAY <b id="day">00</b><span>/ 30</span></span></div><div id="world" class="world" aria-label="Animated diagram of the RF economy"><svg viewBox="0 0 720 330" role="img" aria-label="Friends spend RF at a workshop. Payments split into burn, creator income and a reward reserve. Rewards return to Friends."><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#d6d5ca"/></pattern><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a6aba1"/></marker></defs><rect width="720" height="330" fill="url(#dots)"/><path class="pipe" d="M150 165H290 M395 165H450V67H522 M450 165H522 M450 165V267H522 M585 294V314H105V208"/><path class="flow" d="M150 165H290 M395 165H450V67H522 M450 165H522 M450 165V267H522 M585 294V314H105V208"/>
-<g transform="translate(42,103)"><rect class="node" width="140" height="110" rx="15"/><g class="friend" transform="translate(30,19)" fill="#243a31"><path d="M10 0h8v8h8V0h8v8h8v24h-8v8h-8v-8h-8v8h-8v-8H2V8h8z"/><rect x="10" y="14" width="6" height="6" fill="#e8eddf"/><rect x="28" y="14" width="6" height="6" fill="#e8eddf"/></g><g class="friend friend-two" transform="translate(82,31) scale(.7)" fill="#657c50"><path d="M10 0h8v8h8V0h8v8h8v24h-8v8h-8v-8h-8v8h-8v-8H2V8h8z"/></g><text x="70" y="85" text-anchor="middle" class="node-label">FRIENDS</text></g>
-<g transform="translate(274,101)"><path d="M-12 21L63-23l75 44v12H-12z" fill="#e76f3c"/><rect x="0" y="34" width="126" height="77" rx="6" fill="#ead7b7" stroke="#cfbca0"/><rect x="14" y="48" width="26" height="30" rx="2" fill="#34463c"/><rect x="48" y="48" width="26" height="30" rx="2" fill="#34463c"/><rect x="85" y="48" width="26" height="63" rx="2" fill="#34463c"/><rect x="0" y="26" width="126" height="16" rx="3" fill="#f29868"/><text x="63" y="-5" text-anchor="middle" class="roof-label">FOUNDRY</text><text x="63" y="134" text-anchor="middle" class="node-label">CREATE · PLAY · COLLECT</text></g>
-<g transform="translate(526,30)"><rect class="node burn-node" width="154" height="70" rx="12"/><text x="16" y="26" class="node-label">RF BURN</text><text id="map-burn" x="16" y="50" class="node-value">0 RF</text><path d="M120 15l-9 18 9 16 12-13-4-12-5 7z" fill="#d96335"/></g><g transform="translate(526,130)"><rect class="node creator-node" width="154" height="70" rx="12"/><text x="16" y="26" class="node-label">CREATOR</text><text id="map-creator" x="16" y="50" class="node-value">0 RF</text><path d="M119 19l12 12-12 12-12-12z" fill="#8b7bb1"/></g><g transform="translate(526,230)"><rect class="node reserve-node" width="154" height="70" rx="12"/><text x="16" y="26" class="node-label">REWARD RESERVE</text><text id="map-reserve" x="16" y="50" class="node-value">350 RF</text></g><text x="225" y="150" text-anchor="middle" class="flow-label">SPEND RF</text><text x="325" y="305" class="flow-label">FUNDED REWARDS RETURN TO FRIENDS</text></svg></div>
-<div class="scenario-row" role="group" aria-label="Stress scenario"><button data-scenario="calm" class="scenario selected" aria-pressed="true"><span>↗</span> Steady activity</button><button data-scenario="drought" class="scenario" aria-pressed="false"><span>↘</span> Demand dries up</button><button data-scenario="rush" class="scenario" aria-pressed="false"><span>ϟ</span> Claim surge</button></div><p id="scenario-note" class="fine">A steady community. Same assumptions for all 30 days.</p><div class="transport"><button id="run" class="primary">▶ Run 30 days</button><button id="finish" class="secondary">Skip to results →</button><button id="reset" class="icon-button" title="Reset simulation" aria-label="Reset simulation">↺</button></div><div class="scrubber"><label for="timeline">REPLAY</label><input id="timeline" type="range" min="0" max="30" value="0" aria-label="Replay day"><output id="timeline-label">Day 0</output></div><div class="metrics"><div><span>RF spent</span><strong id="spent">0</strong></div><div><span>RF burned</span><strong id="burned">0</strong></div><div><span>Rewards paid</span><strong id="paid">0</strong></div><div><span>Unfunded rewards</span><strong id="unfunded">0</strong></div></div>
-</div></section>
-<section class="analysis-grid"><article class="panel report"><div class="section-heading"><span class="eyebrow">03 / READ THE SIGNALS</span><span class="small-label">Treasury · RF</span></div><div class="report-heading"><h2 id="verdict">Give your economy a test run.</h2><span id="health" class="health">DESIGN MODE</span></div><p id="insight">The reserve can only pay out what it holds. A shortfall is recorded, never hidden by a negative balance.</p><svg id="chart" viewBox="0 0 660 150" role="img" aria-label="Reward reserve over 30 simulated days"></svg><div class="chart-footer"><span>DAY 1</span><span class="legend"><i class="green"></i> Reserve <i class="purple"></i> Pinned comparison</span><span>DAY 30</span></div><div class="unit-row"><span>Expected reserve change per action</span><strong id="unit-margin"></strong></div><div class="report-actions"><button id="pin" class="secondary">＋ Pin this design</button><button id="stress" class="secondary">Test 100 possible months</button></div><div id="stress-result" class="stress-result" aria-live="polite">One path tells a story. A hundred paths test how often it holds up.</div><div id="comparison" class="fine"></div></article><article class="panel notebook"><div class="section-heading"><span class="eyebrow">04 / TAKE IT FURTHER</span><span class="small-label">Build notes</span></div><h2>From idea to blueprint.</h2><div class="numbered"><b>01</b><p><strong>Make the RF loop useful.</strong> Crafting, access and cosmetics give spending a purpose beyond rewards.</p></div><div class="numbered"><b>02</b><p><strong>Plan for the quiet days.</strong> Try the demand shock. A healthy reserve should not depend on endless new arrivals.</p></div><div class="numbered"><b>03</b><p><strong>Ship the assumptions, too.</strong> Share this exact configuration or export a reproducible report with a day-by-day ledger.</p></div><button id="share" class="secondary wide">Copy shareable blueprint ↗</button><button id="export" class="dark wide">↓ Export design & ledger</button><p id="status" class="fine" role="status"></p></article></section>
-<section id="method" class="method"><div><div class="eyebrow">OPEN MODEL / NO BLACK BOX</div><h2>Assumptions you can inspect.</h2><p>This is a design sandbox for potential experiences paired with $RAREFRIENDS. Its crafting economy is a proposal, not an existing Rare Friends protocol or reward offer.</p></div><div><details><summary>The simulation, in plain English</summary><p>Each day, new Friends arrive. Each Friend independently decides whether to make one RF purchase. The payment splits into burn, creator income and the reserve. A random reward request is paid only from the available reserve. Departures are sampled at the end of the day. No price feed, gas model, agent learning, secondary market or live blockchain is involved.</p><p>Demand shock starts on day 10 and reduces arrivals and purchase probability by 80%. Claim surge doubles reward probability from day 10 (capped at 100%). Retention stays fixed. Runs use a reproducible pseudo-random seed (42); the 100-month test uses seeds 1000–1099. This measures model variability, not real-world odds.</p></details><details><summary>Where Rare Friends fits</summary><p>The proposed spend asset is RF. Friends are the participants; creator income, optional token burns and a finite reward reserve form the proposed loop. A future production build would need audited contracts, validated demand, official identity integration and transaction simulation. This preview requires no wallet or NFT and does not use FriendSDK.</p><p>Diagram characters are original schematic icons, not Generations NFT artwork. <a href="https://rarefriends.com/docs/economy" target="_blank" rel="noopener">Official economy docs ↗</a> · <a href="https://github.com/spokesz/rarefriends-vibeathon" target="_blank" rel="noopener">Vibeathon rules ↗</a></p></details><details><summary>What this cannot tell you</summary><p>A solvent simulation does not predict demand, token value, profit or contest results. Participants are assumed able to afford each purchase. Rewards do not change retention in this version. RF burns do not imply price appreciation. Unfunded amounts are unfulfilled requests, not an enforceable debt. All controls are hypothetical.</p></details></div></section>
-</main><footer><span class="brand-small">ff / FRIEND FOUNDRY</span><span>Built by <a href="https://github.com/plus8bit">plus8bit</a> · Rare Friends Vibeathon 2026</span><span>A little less guesswork. A better place to build.</span></footer><script type="module" src="app.mjs"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f4f2eb" />
+    <meta
+      name="description"
+      content="Design, simulate and stress-test a Rare Friends token economy before spending a single RF."
+    />
+    <title>Friend Foundry — build an economy that lasts</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./"
+        ><span class="brand-icon">ff</span> FRIEND FOUNDRY<span class="edition"
+          >/ 001</span
+        ></a
+      >
+      <nav>
+        <a href="#method">How it works</a
+        ><a
+          href="https://github.com/plus8bit/friend-foundry"
+          target="_blank"
+          rel="noopener"
+          >Source ↗</a
+        ><span class="tag"><i></i> ZERO-TRANSACTION LAB</span>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">A BUILDER'S TOOL FOR RARE FRIENDS</div>
+          <h1>Good friends.<br /><span>Lasting economies.</span></h1>
+          <p>
+            Give your idea a world to live in. Design the RF flow, put it under
+            pressure, and see what survives.
+          </p>
+        </div>
+        <aside class="hero-note">
+          <span class="note-number">30</span>
+          <div>virtual days.<br />Real design decisions.</div>
+          <small
+            >All RF flows are simulated.<br />No wallet. No funds. No
+            forecasts.</small
+          >
+        </aside>
+      </section>
+      <section class="workspace" aria-label="Economy designer">
+        <aside class="design panel">
+          <div class="section-heading">
+            <span class="eyebrow">01 / DESIGN</span
+            ><span class="small-label">Your blueprint</span>
+          </div>
+          <label class="select-label" for="preset">Start with an idea</label
+          ><select id="preset">
+            <option value="workshop">Crafting workshop</option>
+            <option value="arcade">Reward-heavy arcade</option>
+            <option value="club">Friends creative club</option>
+          </select>
+          <p class="preset-note" id="preset-note"></p>
+          <div id="controls"></div>
+          <div class="allocation">
+            <div id="allocation-bar"></div>
+            <div class="legend">
+              <span><i class="orange"></i>Burn</span
+              ><span><i class="purple"></i>Creator</span
+              ><span><i class="green"></i>Reserve</span>
+            </div>
+          </div>
+          <details>
+            <summary>Community assumptions</summary>
+            <div id="community-controls"></div>
+            <p class="fine">
+              Each active Friend makes at most one purchase per day. Retention
+              and arrivals are fixed assumptions, not measured behavior.
+            </p>
+          </details>
+        </aside>
+        <div class="stage panel">
+          <div class="section-heading">
+            <span class="eyebrow">02 / PUT IT IN MOTION</span
+            ><span class="live-dot" id="run-label">READY TO SIMULATE</span>
+          </div>
+          <div class="world-heading">
+            <h2 id="world-title">The crafting district</h2>
+            <span class="day-badge"
+              >DAY <b id="day">00</b><span>/ 30</span></span
+            >
+          </div>
+          <div
+            id="world"
+            class="world"
+            aria-label="Animated diagram of the RF economy"
+          >
+            <svg
+              viewBox="0 0 720 330"
+              role="img"
+              aria-label="Friends spend RF at a workshop. Payments split into burn, creator income and a reward reserve. Rewards return to Friends."
+            >
+              <defs>
+                <pattern
+                  id="dots"
+                  width="20"
+                  height="20"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <circle cx="2" cy="2" r="1" fill="#d6d5ca" />
+                </pattern>
+                <marker
+                  id="arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#a6aba1" />
+                </marker>
+              </defs>
+              <rect width="720" height="330" fill="url(#dots)" />
+              <path
+                class="pipe"
+                d="M150 165H290 M395 165H450V67H522 M450 165H522 M450 165V267H522 M585 294V314H105V208"
+              />
+              <path
+                class="flow"
+                d="M150 165H290 M395 165H450V67H522 M450 165H522 M450 165V267H522 M585 294V314H105V208"
+              />
+              <g transform="translate(42,103)">
+                <rect class="node" width="140" height="110" rx="15" />
+                <g class="friend" transform="translate(30,19)" fill="#243a31">
+                  <path
+                    d="M10 0h8v8h8V0h8v8h8v24h-8v8h-8v-8h-8v8h-8v-8H2V8h8z"
+                  />
+                  <rect x="10" y="14" width="6" height="6" fill="#e8eddf" />
+                  <rect x="28" y="14" width="6" height="6" fill="#e8eddf" />
+                </g>
+                <g
+                  class="friend friend-two"
+                  transform="translate(82,31) scale(.7)"
+                  fill="#657c50"
+                >
+                  <path
+                    d="M10 0h8v8h8V0h8v8h8v24h-8v8h-8v-8h-8v8h-8v-8H2V8h8z"
+                  />
+                </g>
+                <text x="70" y="85" text-anchor="middle" class="node-label">
+                  FRIENDS
+                </text>
+              </g>
+              <g transform="translate(274,101)">
+                <path d="M-12 21L63-23l75 44v12H-12z" fill="#e76f3c" />
+                <rect
+                  x="0"
+                  y="34"
+                  width="126"
+                  height="77"
+                  rx="6"
+                  fill="#ead7b7"
+                  stroke="#cfbca0"
+                />
+                <rect
+                  x="14"
+                  y="48"
+                  width="26"
+                  height="30"
+                  rx="2"
+                  fill="#34463c"
+                />
+                <rect
+                  x="48"
+                  y="48"
+                  width="26"
+                  height="30"
+                  rx="2"
+                  fill="#34463c"
+                />
+                <rect
+                  x="85"
+                  y="48"
+                  width="26"
+                  height="63"
+                  rx="2"
+                  fill="#34463c"
+                />
+                <rect
+                  x="0"
+                  y="26"
+                  width="126"
+                  height="16"
+                  rx="3"
+                  fill="#f29868"
+                />
+                <text x="63" y="-5" text-anchor="middle" class="roof-label">
+                  FOUNDRY
+                </text>
+                <text x="63" y="134" text-anchor="middle" class="node-label">
+                  CREATE · PLAY · COLLECT
+                </text>
+              </g>
+              <g transform="translate(526,30)">
+                <rect class="node burn-node" width="154" height="70" rx="12" />
+                <text x="16" y="26" class="node-label">RF BURN</text>
+                <text id="map-burn" x="16" y="50" class="node-value">0 RF</text>
+                <path d="M120 15l-9 18 9 16 12-13-4-12-5 7z" fill="#d96335" />
+              </g>
+              <g transform="translate(526,130)">
+                <rect
+                  class="node creator-node"
+                  width="154"
+                  height="70"
+                  rx="12"
+                />
+                <text x="16" y="26" class="node-label">CREATOR</text>
+                <text id="map-creator" x="16" y="50" class="node-value">
+                  0 RF
+                </text>
+                <path d="M119 19l12 12-12 12-12-12z" fill="#8b7bb1" />
+              </g>
+              <g transform="translate(526,230)">
+                <rect
+                  class="node reserve-node"
+                  width="154"
+                  height="70"
+                  rx="12"
+                />
+                <text x="16" y="26" class="node-label">REWARD RESERVE</text>
+                <text id="map-reserve" x="16" y="50" class="node-value">
+                  350 RF
+                </text>
+              </g>
+              <text x="225" y="150" text-anchor="middle" class="flow-label">
+                SPEND RF
+              </text>
+              <text x="325" y="305" class="flow-label">
+                FUNDED REWARDS RETURN TO FRIENDS
+              </text>
+            </svg>
+          </div>
+          <div class="scenario-row" role="group" aria-label="Stress scenario">
+            <button
+              data-scenario="calm"
+              class="scenario selected"
+              aria-pressed="true"
+            >
+              <span>↗</span> Steady activity</button
+            ><button
+              data-scenario="drought"
+              class="scenario"
+              aria-pressed="false"
+            >
+              <span>↘</span> Demand dries up</button
+            ><button data-scenario="rush" class="scenario" aria-pressed="false">
+              <span>ϟ</span> Claim surge
+            </button>
+          </div>
+          <p id="scenario-note" class="fine">
+            A steady community. Same assumptions for all 30 days.
+          </p>
+          <div class="transport">
+            <button id="run" class="primary">▶ Run 30 days</button
+            ><button id="finish" class="secondary">Skip to results →</button
+            ><button
+              id="reset"
+              class="icon-button"
+              title="Reset simulation"
+              aria-label="Reset simulation"
+            >
+              ↺
+            </button>
+          </div>
+          <div class="scrubber">
+            <label for="timeline">REPLAY</label
+            ><input
+              id="timeline"
+              type="range"
+              min="0"
+              max="30"
+              value="0"
+              aria-label="Replay day"
+            /><output id="timeline-label">Day 0</output>
+          </div>
+          <div class="metrics">
+            <div><span>RF spent</span><strong id="spent">0</strong></div>
+            <div><span>RF burned</span><strong id="burned">0</strong></div>
+            <div><span>Rewards paid</span><strong id="paid">0</strong></div>
+            <div>
+              <span>Unfunded rewards</span><strong id="unfunded">0</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="analysis-grid">
+        <article class="panel report">
+          <div class="section-heading">
+            <span class="eyebrow">03 / READ THE SIGNALS</span
+            ><span class="small-label">Treasury · RF</span>
+          </div>
+          <div class="report-heading">
+            <h2 id="verdict">Give your economy a test run.</h2>
+            <span id="health" class="health">DESIGN MODE</span>
+          </div>
+          <p id="insight">
+            The reserve can only pay out what it holds. A shortfall is recorded,
+            never hidden by a negative balance.
+          </p>
+          <svg
+            id="chart"
+            viewBox="0 0 660 150"
+            role="img"
+            aria-label="Reward reserve over 30 simulated days"
+          ></svg>
+          <div class="chart-footer">
+            <span>DAY 1</span
+            ><span class="legend"
+              ><i class="green"></i> Reserve <i class="purple"></i> Pinned
+              comparison</span
+            ><span>DAY 30</span>
+          </div>
+          <div class="unit-row">
+            <span>Expected reserve change per action</span
+            ><strong id="unit-margin"></strong>
+          </div>
+          <div class="report-actions">
+            <button id="pin" class="secondary">＋ Pin this design</button
+            ><button id="stress" class="secondary">
+              Test 100 possible months
+            </button>
+          </div>
+          <div id="stress-result" class="stress-result" aria-live="polite">
+            One path tells a story. A hundred paths test how often it holds up.
+          </div>
+          <div id="comparison" class="fine"></div>
+        </article>
+        <article class="panel notebook">
+          <div class="section-heading">
+            <span class="eyebrow">04 / TAKE IT FURTHER</span
+            ><span class="small-label">Build notes</span>
+          </div>
+          <h2>From idea to blueprint.</h2>
+          <div class="numbered">
+            <b>01</b>
+            <p>
+              <strong>Make the RF loop useful.</strong> Crafting, access and
+              cosmetics give spending a purpose beyond rewards.
+            </p>
+          </div>
+          <div class="numbered">
+            <b>02</b>
+            <p>
+              <strong>Plan for the quiet days.</strong> Try the demand shock. A
+              healthy reserve should not depend on endless new arrivals.
+            </p>
+          </div>
+          <div class="numbered">
+            <b>03</b>
+            <p>
+              <strong>Ship the assumptions, too.</strong> Share this exact
+              configuration or export a reproducible report with a day-by-day
+              ledger.
+            </p>
+          </div>
+          <button id="share" class="secondary wide">
+            Copy shareable blueprint ↗</button
+          ><button id="export" class="dark wide">
+            ↓ Export design & ledger
+          </button>
+          <p id="status" class="fine" role="status"></p>
+        </article>
+      </section>
+      <section id="method" class="method">
+        <div>
+          <div class="eyebrow">OPEN MODEL / NO BLACK BOX</div>
+          <h2>Assumptions you can inspect.</h2>
+          <p>
+            This is a design sandbox for potential experiences paired with
+            $RAREFRIENDS. Its crafting economy is a proposal, not an existing
+            Rare Friends protocol or reward offer.
+          </p>
+        </div>
+        <div>
+          <details>
+            <summary>The simulation, in plain English</summary>
+            <p>
+              Each day, new Friends arrive. Each Friend independently decides
+              whether to make one RF purchase. The payment splits into burn,
+              creator income and the reserve. A random reward request is paid
+              only from the available reserve. Departures are sampled at the end
+              of the day. No price feed, gas model, agent learning, secondary
+              market or live blockchain is involved.
+            </p>
+            <p>
+              Demand shock starts on day 10 and reduces arrivals and purchase
+              probability by 80%. Claim surge doubles reward probability from
+              day 10 (capped at 100%). Retention stays fixed. Runs use a
+              reproducible pseudo-random seed (42); the 100-month test uses
+              seeds 1000–1099. This measures model variability, not real-world
+              odds.
+            </p>
+          </details>
+          <details>
+            <summary>Where Rare Friends fits</summary>
+            <p>
+              The proposed spend asset is RF. Friends are the participants;
+              creator income, optional token burns and a finite reward reserve
+              form the proposed loop. A future production build would need
+              audited contracts, validated demand, official identity integration
+              and transaction simulation. This preview requires no wallet or NFT
+              and does not use FriendSDK.
+            </p>
+            <p>
+              Diagram characters are original schematic icons, not Generations
+              NFT artwork.
+              <a
+                href="https://rarefriends.com/docs/economy"
+                target="_blank"
+                rel="noopener"
+                >Official economy docs ↗</a
+              >
+              ·
+              <a
+                href="https://github.com/spokesz/rarefriends-vibeathon"
+                target="_blank"
+                rel="noopener"
+                >Vibeathon rules ↗</a
+              >
+            </p>
+          </details>
+          <details>
+            <summary>What this cannot tell you</summary>
+            <p>
+              A solvent simulation does not predict demand, token value, profit
+              or contest results. Participants are assumed able to afford each
+              purchase. Rewards do not change retention in this version. RF
+              burns do not imply price appreciation. Unfunded amounts are
+              unfulfilled requests, not an enforceable debt. All controls are
+              hypothetical.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span class="brand-small">ff / FRIEND FOUNDRY</span
+      ><span
+        >Built by <a href="https://github.com/plus8bit">plus8bit</a> · Rare
+        Friends Vibeathon 2026</span
+      ><span>A little less guesswork. A better place to build.</span>
+    </footer>
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>

@@ -1,1 +1,11 @@
-{"name":"friend-foundry","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test test-engine.mjs","start":"python3 -m http.server 8766 --bind 127.0.0.1"},"description":"A reproducible RF economy design and stress-testing studio for Rare Friends."}
+{
+  "name": "friend-foundry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test-engine.mjs",
+    "start": "python3 -m http.server 8766 --bind 127.0.0.1"
+  },
+  "description": "A reproducible RF economy design and stress-testing studio for Rare Friends."
+}

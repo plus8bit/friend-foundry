@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
       - run: npm test
       - run: mkdir dist && cp index.html style.css app.mjs engine.mjs icon.svg dist/
       - uses: actions/configure-pages@v5
