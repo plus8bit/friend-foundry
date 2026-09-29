@@ -232,17 +232,19 @@ $("stress").addEventListener("click", () => {
   $("stress-result").textContent =
     `${s.shortfalls} / ${s.runs} simulated months had an unfunded reward request. Final reserve: ${fmt(s.p10)} RF at the 10th percentile · ${fmt(s.median)} RF median · ${fmt(s.p90)} RF at the 90th percentile. These are model outcomes, not real-world probabilities.`;
 });
-$("share").addEventListener("click", async () => {
+$("share").addEventListener("click", () => {
   const url = new URL(location.href);
   url.search = encodeConfig(params, scenario);
   url.hash = "";
-  try {
-    await navigator.clipboard.writeText(url.href);
-    $("status").textContent =
-      "Blueprint link copied. It opens these exact assumptions.";
-  } catch {
-    $("status").textContent = "Copy this link: " + url.href;
-  }
+  // Always expose the link: clipboard permission can remain pending in an
+  // embedded browser, so sharing must not depend on its resolution.
+  $("status").textContent = "Your blueprint link is ready. ";
+  const link = document.createElement("a");
+  link.href = url.href;
+  link.textContent = "Open or copy this exact design ↗";
+  link.style.textDecoration = "underline";
+  $("status").append(link);
+  navigator.clipboard?.writeText(url.href).catch(() => {});
 });
 $("export").addEventListener("click", () => {
   const report = {
